@@ -15,6 +15,7 @@ import dynamic from "next/dynamic";
 import Search from "../AddOns/Search";
 import FolderTree from "../AddOns/FolderTree";
 import Link from "next/link";
+import HistoryComponent from "../AddOns/HistoryBox";
 
 const FadeInAnimation = dynamic(() => import("@/common/FadeInAnimation"));
 
@@ -106,6 +107,7 @@ export default function SideBar({
           <div className="pt-16 w-full h-full transition">
             {category === "search" && <Search />}
             {category === "folder" && <FolderTree />}
+            <HistoryComponent />
           </div>
         )}
       </div>
