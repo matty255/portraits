@@ -32,6 +32,16 @@ interface PostFilteredArray {
 }
 type Size = "sm" | "md" | "lg";
 
+type SideBarCategory =
+  | "all"
+  | "search"
+  | "folder"
+  | "contact"
+  | "graph"
+  | "trouble-shooting"
+  | "recommendation";
+type PostCategory = "all" | "react" | "nextjs" | "typescript" | "javascript";
+
 export type {
   LayoutProps,
   PostData,
@@ -39,4 +49,6 @@ export type {
   PostIdParams,
   Size,
   PostFilteredArray,
+  SideBarCategory,
+  PostCategory,
 };

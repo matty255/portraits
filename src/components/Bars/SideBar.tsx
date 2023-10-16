@@ -16,6 +16,7 @@ import Search from "../AddOns/Search";
 import FolderTree from "../AddOns/FolderTree";
 import Link from "next/link";
 import HistoryComponent from "../AddOns/HistoryBox";
+import { SideBarCategory } from "@/types/common";
 
 const FadeInAnimation = dynamic(() => import("@/common/FadeInAnimation"));
 
@@ -27,15 +28,19 @@ export default function SideBar({
 
   toggle: Dispatch<SetStateAction<boolean>>;
 }) {
-  const [category, setCategory] = useState<string>("folder");
+  const [category, setCategory] = useState<SideBarCategory>("folder");
 
-  function toggleCategory(word: string) {
+  function toggleCategory(word: SideBarCategory) {
     if (isShown && category === word) {
       toggle(!isShown);
     } else {
       setCategory(word);
       if (!isShown) toggle(!isShown);
     }
+  }
+
+  function consoleForAdmin() {
+    alert("This page is for admin");
   }
 
   const icons = [
@@ -49,18 +54,21 @@ export default function SideBar({
       className="w-12 h-auto text-white cursor-pointer"
       onClick={() => toggleCategory("folder")}
     />,
-    <VscSourceControl
-      key="source-control"
-      className="w-12 h-auto text-white cursor-pointer"
-      onClick={() => toggle(!isShown)}
-    />,
+    <Link href="/graph" key="source-control">
+      <VscSourceControl
+        className="w-12 h-auto text-white cursor-pointer"
+        onClick={() => toggleCategory("graph")}
+      />
+    </Link>,
     <VscDebugAltSmall
       key="debug"
       className="w-12 h-auto text-white cursor-pointer"
+      onClick={() => toggleCategory("trouble-shooting")}
     />,
     <VscExtensions
       key="extensions"
       className="w-12 h-auto text-white cursor-pointer"
+      onClick={() => toggleCategory("recommendation")}
     />,
   ];
 
@@ -90,16 +98,19 @@ export default function SideBar({
             <VscCommentDiscussion
               key="comment-discussion"
               className="w-12 h-auto text-white cursor-pointer"
+              onClick={consoleForAdmin}
             />
 
             <VscAccount
               key="account"
               className="w-12 h-auto text-white cursor-pointer"
+              onClick={consoleForAdmin}
             />
 
             <VscSettingsGear
               key="settings"
               className="w-12 h-auto text-white cursor-pointer"
+              onClick={consoleForAdmin}
             />
           </div>
         </div>

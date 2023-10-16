@@ -24,13 +24,13 @@ export default function TitleBar({
   return (
     <div className="w-full fixed top-0 left-0">
       <div className=" shadow-md md:shadow-none bg-blue-500 dark:bg-slate-950 grid grid-cols-12 grid-rows-1 gap-4 h-11 fixed w-full top-0 z-30">
-        {home ? (
+        {/* {home ? (
           <></>
         ) : (
           <Link href={"/"}>
             <VscLayout />
           </Link>
-        )}
+        )} */}
         <div
           onClick={!isShown ? toggle : () => {}}
           className="group relative items-center cursor-pointer p-1 w-full md:w-1/2 rounded-md col-start-3 col-end-11 dark:hover:bg-slate-900 hover:bg-blue-300  dark:bg-slate-800 flex justify-center content-center m-auto font-semibold"
