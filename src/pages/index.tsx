@@ -10,7 +10,7 @@ import React from "react";
 
 import { motion } from "framer-motion";
 import { TypingAnimationArray, profile } from "../constants/profile";
-import TypingAnimationText from "../components/functions/TypingAnimationText";
+import TypingAnimationText from "../common/TypingAnimationText";
 import Chip from "../common/Chip";
 import Layout from "@/layout";
 import { PostData } from "@/types/common";
@@ -19,8 +19,8 @@ export default function Home({
   allPostsData,
   allCategories,
 }: {
-  allPostsData: any;
-  allCategories: any;
+  allPostsData: PostData[];
+  allCategories: string[];
 }) {
   const { siteTitle, description, url, banner } = profile;
   const [viewCategory, setCategory] = useState("all");
@@ -54,13 +54,13 @@ export default function Home({
         </section>
 
         <section>
-          <TypingAnimationText
+          {/* <TypingAnimationText
             words={TypingAnimationArray}
             wordIndex={wordIndex}
             setWordIndex={setWordIndex}
-          />
+          /> */}
         </section>
-        <section>
+        <section className="inline-flex gap-3">
           {allCategories.map((category: string) => (
             <Chip
               key={category}
