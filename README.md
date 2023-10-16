@@ -1,6 +1,6 @@
 # Next.js Blog Project
 
-## 제작 중!
+## not finished, yet.
 
 ## Project Overview
 
@@ -23,9 +23,10 @@ The project has the following folder structure:
 
 To get started with the project, you can clone the repository and run the development server using the following commands:
 
-\`\`\`bash
+```
+npm i
 npm run dev
-\`\`\`
+```
 
 ## Technologies Used
 
@@ -35,5 +36,7 @@ npm run dev
 
 ## Additional Features
 
-- Git Graph Concept
+- VSCode Git Graph Concept
 - Folder Tree and Search Posts
+- DarkMode
+- Multilingual page(English)
