@@ -1,4 +1,5 @@
 import { Size } from "@/types/common";
+
 import React, { HTMLAttributes } from "react";
 
 interface ChipProps {
@@ -11,7 +12,7 @@ interface ChipProps {
 export default function Chip({
   content,
   color = "blue",
-
+  onClick,
   ...rest
 }: ChipProps): JSX.Element {
   const bgColor = `bg-${color}-500`;
@@ -19,9 +20,10 @@ export default function Chip({
 
   return (
     <div
-      className={`bg-blue-200 rounded-full text-center font-bold cursor-pointer`}
+      onClick={onClick}
+      className={`flex justify-center items-center w-fit h-5 px-3 bg-blue-200 text-sky-400 rounded-full text-center font-bold cursor-pointer`}
     >
-      <p className="text-sky-400">{content}</p>
+      {content}
     </div>
   );
 }

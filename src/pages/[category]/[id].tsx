@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Layout from "../../app/layout";
+import Layout from "@/layout";
 import Date from "../../common/Date";
 import { getAllPostIds, getPostData } from "../../lib/MakePosts";
 import React from "react";

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import Layout from "../app/layout";
+
 import Date from "../common/Date";
 
 import { getSortedPostsData } from "../lib/MakePosts";
@@ -12,14 +12,15 @@ import { motion } from "framer-motion";
 import { TypingAnimationArray, profile } from "../constants/profile";
 import TypingAnimationText from "../components/functions/TypingAnimationText";
 import Chip from "../common/Chip";
+import Layout from "@/layout";
 import { PostData } from "@/types/common";
 
 export default function Home({
   allPostsData,
   allCategories,
 }: {
-  allPostsData: PostData[];
-  allCategories: string[];
+  allPostsData: any;
+  allCategories: any;
 }) {
   const { siteTitle, description, url, banner } = profile;
   const [viewCategory, setCategory] = useState("all");
@@ -71,33 +72,35 @@ export default function Home({
         <section>
           <h2>Posts</h2>
           <ul>
-            {allPostsData.map(({ id, category, date, title, image }) => (
-              <motion.article
-                key={id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <li
-                  style={{
-                    display:
-                      viewCategory === category || viewCategory === "all"
-                        ? "block"
-                        : "none",
-                  }}
+            {allPostsData.map(
+              ({ id, category, date, title, image }: PostData) => (
+                <motion.article
+                  key={id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <Link href="/[category]/[id]" as={`/${category}/${id}`}>
-                    {title}
-                  </Link>
-                  <br />
-                  <small>
-                    <Date dateString={date} />
-                  </small>
-                  <br />
-                  {/* <Image src={image} alt={id} layout="fill" objectFit="cover" /> */}
-                </li>
-              </motion.article>
-            ))}
+                  <li
+                    style={{
+                      display:
+                        viewCategory === category || viewCategory === "all"
+                          ? "block"
+                          : "none",
+                    }}
+                  >
+                    <Link href="/[category]/[id]" as={`/${category}/${id}`}>
+                      {title}
+                    </Link>
+                    <br />
+                    <small>
+                      <Date dateString={date} />
+                    </small>
+                    <br />
+                    {/* <Image src={image} alt={id} layout="fill" objectFit="cover" /> */}
+                  </li>
+                </motion.article>
+              )
+            )}
           </ul>
         </section>
       </div>

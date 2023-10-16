@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./globals.css";
 import { AppProps } from "next/app";
 // import { DarkModeProvider } from "../lib/DarkModeContext";
 
