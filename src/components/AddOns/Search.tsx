@@ -10,7 +10,7 @@ export default function Search() {
   );
   const router = useRouter();
 
-  console.log(allPostsData);
+  // console.log(allPostsData);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState<PostData[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);

@@ -70,3 +70,11 @@ export async function getPostData(
     ...matterResult.data,
   };
 }
+export function getPostsByCategory(category: string): PostData[] {
+  const allPosts = getSortedPostsData();
+  return allPosts.filter((post) => post.category === category);
+}
+export function getAllCategories(): string[] {
+  const categories = fs.readdirSync(postsDirectory);
+  return categories;
+}

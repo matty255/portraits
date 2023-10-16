@@ -27,6 +27,16 @@ interface PostIdParams {
   };
 }
 
+interface PostFilteredArray {
+  posts: PostData[];
+}
 type Size = "sm" | "md" | "lg";
 
-export type { LayoutProps, PostData, PostContentData, PostIdParams, Size };
+export type {
+  LayoutProps,
+  PostData,
+  PostContentData,
+  PostIdParams,
+  Size,
+  PostFilteredArray,
+};

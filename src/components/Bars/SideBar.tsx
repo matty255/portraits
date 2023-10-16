@@ -14,6 +14,7 @@ import {
 import dynamic from "next/dynamic";
 import Search from "../AddOns/Search";
 import FolderTree from "../AddOns/FolderTree";
+import Link from "next/link";
 
 const FadeInAnimation = dynamic(() => import("@/common/FadeInAnimation"));
 
@@ -25,10 +26,15 @@ export default function SideBar({
 
   toggle: Dispatch<SetStateAction<boolean>>;
 }) {
-  const [category, setCategory] = useState<string>("search");
+  const [category, setCategory] = useState<string>("folder");
 
   function toggleCategory(word: string) {
-    setCategory(word);
+    if (isShown && category === word) {
+      toggle(!isShown);
+    } else {
+      setCategory(word);
+      if (!isShown) toggle(!isShown);
+    }
   }
 
   const icons = [
@@ -68,7 +74,13 @@ export default function SideBar({
           className={`px-12 w-24 scrollbar-hide overflow-y-scroll pt-16 pb-5 flex flex-col h-full items-center justify-between ${"items-start"}`}
         >
           <div className="flex flex-col gap-y-6 items-center">
-            <VscHome className="w-14 h-auto text-white cursor-pointer " />
+            <Link href="/">
+              <VscHome
+                onClick={() => toggle(!isShown)}
+                className="w-14 h-auto text-white cursor-pointer "
+              />
+            </Link>
+
             <FadeInAnimation icons={icons} isShown={isShown} />
           </div>
           <div className="p-3"></div>

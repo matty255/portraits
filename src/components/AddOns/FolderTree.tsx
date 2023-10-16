@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { allPostsDataState } from "../../../store/allPostsDataState";
 import { PostData } from "@/types/common";
+import Link from "next/link";
 
 interface FolderTreeProps {
   folder: string;
@@ -47,13 +48,24 @@ function createFolderTree(posts: PostData[]): FolderTreeProps[] {
 
 const RenderFolderTree = ({ node }: { node: FolderTreeProps }) => {
   return (
-    <div style={{ marginLeft: "20px" }}>
-      <div>{node.folder}</div>
+    <div className="ml-5">
+      <Link
+        className="text-blue-500 hover:underline"
+        href={node.isPost ? `${node.path}` : `${node.folder}`}
+      >
+        {node.folder}
+      </Link>
       {node.isPost && (
-        <div style={{ marginLeft: "20px" }}>
-          Posts:
+        <div className="ml-5">
           {node.posts.map((postId, index) => (
-            <div key={index}>{postId}</div>
+            <div key={index} className="my-1">
+              <Link
+                className="text-green-500 hover:underline"
+                href={`${node.path}/${node.posts[index]}`}
+              >
+                {postId}
+              </Link>
+            </div>
           ))}
         </div>
       )}
