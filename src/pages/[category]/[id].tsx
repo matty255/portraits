@@ -1,20 +1,31 @@
 import Head from "next/head";
 import Layout from "@/layout";
 import Date from "../../common/Date";
-import { getAllPostIds, getPostData } from "../../lib/MakePosts";
-import React from "react";
+import {
+  getAllPostIds,
+  getPostData,
+  getSortedPostsData,
+} from "../../lib/MakePosts";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { PostContentData, PostIdParams } from "../../types/common";
 import { profile } from "../../constants/profile";
+import { useRecoilState } from "recoil";
+import { allPostsDataState } from "../../../store/allPostsDataState";
 
-export default function Post({ postData }: PostContentData) {
+export default function Post({ postData, allPostsData }: PostContentData) {
+  const [allPostsDataInit, setAllPostsData] = useRecoilState(allPostsDataState);
+
+  useEffect(() => {
+    if (allPostsDataInit.length === 0) setAllPostsData(allPostsData);
+  }, [allPostsData, setAllPostsData, allPostsDataInit]);
   return (
     <Layout home={false}>
       <Head>
         <title>{postData.title}</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
         <meta property="og:type" content="article" />
         <meta property="og:title" content={postData.title} />
 
@@ -56,9 +67,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: PostIdParams) {
   const postData = await getPostData(params.category, params.id);
+  const allPostsData = getSortedPostsData();
   return {
     props: {
       postData,
+      allPostsData,
     },
   };
 }

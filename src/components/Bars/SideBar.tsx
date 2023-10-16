@@ -12,6 +12,8 @@ import {
 } from "react-icons/vsc";
 
 import dynamic from "next/dynamic";
+import Search from "../AddOns/Search";
+import FolderTree from "../AddOns/FolderTree";
 
 const FadeInAnimation = dynamic(() => import("@/common/FadeInAnimation"));
 
@@ -23,21 +25,27 @@ export default function SideBar({
 
   toggle: Dispatch<SetStateAction<boolean>>;
 }) {
-  const [category, setCategory] = useState<string>("all");
+  const [category, setCategory] = useState<string>("search");
+
+  function toggleCategory(word: string) {
+    setCategory(word);
+  }
+
   const icons = [
     <VscSearch
       key="search"
       className="w-12 h-auto text-white cursor-pointer"
-      onClick={() => setCategory("search")}
+      onClick={() => toggleCategory("search")}
     />,
     <VscFiles
-      key="files"
+      key="folder"
       className="w-12 h-auto text-white cursor-pointer"
-      onClick={() => toggle(!isShown)}
+      onClick={() => toggleCategory("folder")}
     />,
     <VscSourceControl
       key="source-control"
       className="w-12 h-auto text-white cursor-pointer"
+      onClick={() => toggle(!isShown)}
     />,
     <VscDebugAltSmall
       key="debug"
@@ -82,7 +90,12 @@ export default function SideBar({
             />
           </div>
         </div>
-        {isShown && <div className="w-full h-full transition"></div>}
+        {isShown && (
+          <div className="pt-16 w-full h-full transition">
+            {category === "search" && <Search />}
+            {category === "folder" && <FolderTree />}
+          </div>
+        )}
       </div>
     </div>
   );

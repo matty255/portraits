@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Date from "../common/Date";
 
@@ -14,6 +14,8 @@ import TypingAnimationText from "../common/TypingAnimationText";
 import Chip from "../common/Chip";
 import Layout from "@/layout";
 import { PostData } from "@/types/common";
+import { useRecoilState } from "recoil";
+import { allPostsDataState } from "../../store/allPostsDataState";
 
 export default function Home({
   allPostsData,
@@ -25,6 +27,11 @@ export default function Home({
   const { siteTitle, description, url, banner } = profile;
   const [viewCategory, setCategory] = useState("all");
   const [wordIndex, setWordIndex] = useState(0);
+  const [allPostsDataInit, setAllPostsData] = useRecoilState(allPostsDataState);
+
+  useEffect(() => {
+    setAllPostsData(allPostsData);
+  }, [allPostsData, setAllPostsData]);
 
   return (
     <Layout home>
@@ -32,7 +39,7 @@ export default function Home({
         <title>{siteTitle}</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
         <meta property="og:type" content="article" />
         <meta property="og:title" content={siteTitle} />
 
