@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
 import TSIcon from "../../../public/typescript-svgrepo-com.svg";
+import { historyStackState } from "../../../store/historyStackState";
+import { useRecoilState } from "recoil";
 interface HistoryItem {
   path: string;
   title: string;
@@ -11,7 +13,8 @@ interface HistoryItem {
 
 const HistoryComponent = () => {
   const [historyStack, setHistoryStack] = useState<HistoryItem[]>([]);
-  const [isOpen, setIsOpen] = useState(true);
+
+  const [isOpen, setIsOpen] = useRecoilState(historyStackState);
   const [initialRender, setInitialRender] = useState(true);
   const router = useRouter();
 
@@ -57,7 +60,7 @@ const HistoryComponent = () => {
   return (
     <div className="p-4 relative w-full ">
       <motion.div
-        initial={initialRender ? {} : { height: 0 }}
+        initial={initialRender && !isOpen ? { height: 0 } : {}}
         animate={{ height: isOpen ? "15rem" : 0 }}
         exit={{ height: 0 }}
         transition={{ duration: 0.3 }}
