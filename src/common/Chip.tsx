@@ -2,10 +2,9 @@ import { Size } from "@/types/common";
 
 import React, { HTMLAttributes } from "react";
 
-interface ChipProps {
+interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   color?: string;
   content: string;
-  onClick?: () => void;
   size?: Size;
 }
 

@@ -12,11 +12,11 @@ interface TimelineProps {
 }
 export default function Graph() {
   const items = [
-    { date: "2022-02-02", text: "더플랑주식회사 입사", iconType: "test" },
-    { date: "2022-02-02", text: "수성대학교 졸업", iconType: "test" },
+    { date: "2022-02-02", text: "회사 입사", iconType: "test" },
+    { date: "2022-02-02", text: "대학교 졸업", iconType: "test" },
     {
       date: "2022-02-02",
-      text: "청담정보통신고등학교 졸업",
+      text: "고등학교 졸업",
       iconType: "test",
     },
     { date: "2022-02-02", text: "test", iconType: "test" },

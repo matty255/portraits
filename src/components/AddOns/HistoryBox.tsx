@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
+import { motion, AnimatePresence } from "framer-motion";
+import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
+import TSIcon from "../../../public/typescript-svgrepo-com.svg";
 interface HistoryItem {
   path: string;
   title: string;
@@ -9,6 +11,8 @@ interface HistoryItem {
 
 const HistoryComponent = () => {
   const [historyStack, setHistoryStack] = useState<HistoryItem[]>([]);
+  const [isOpen, setIsOpen] = useState(true);
+  const [initialRender, setInitialRender] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,21 +20,23 @@ const HistoryComponent = () => {
     if (savedHistory) {
       setHistoryStack(JSON.parse(savedHistory));
     }
+    setInitialRender(false);
   }, []);
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
+      const title = document.title || "Untitled";
+      if (title === "Untitled" || !url) return;
+
       const newHistoryItem: HistoryItem = {
         path: url,
-        title: document.title || "Untitled",
+        title: title,
       };
 
       setHistoryStack((prevState) => {
-        // 마지막 아이템의 path와 새로운 아이템의 path를 비교
         const lastItem = prevState[prevState.length - 1];
         if (lastItem && lastItem.path === newHistoryItem.path) {
-          //   console.log("이미 있음");
-          return prevState; // 상태 변경 없이 현재 상태 반환
+          return prevState;
         }
 
         const newState = [...prevState, newHistoryItem].slice(-10);
@@ -39,7 +45,6 @@ const HistoryComponent = () => {
       });
     };
 
-    // 현재 경로를 처음에 한 번만 추가
     handleRouteChange(router.asPath);
 
     router.events.on("routeChangeComplete", handleRouteChange);
@@ -50,20 +55,49 @@ const HistoryComponent = () => {
   }, [router]);
 
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-bold">History Stack</h2>
-      <ul className="list-decimal list-inside">
-        {historyStack
-          .slice()
-          .reverse()
-          .map((item, index) => (
-            <li key={index} className="text-sm">
-              <Link href={item.path || "/"}>
-                {item.title || item.path || "Untitled"}
-              </Link>
-            </li>
-          ))}
-      </ul>
+    <div className="p-4 relative w-full ">
+      <motion.div
+        initial={initialRender ? {} : { height: 0 }}
+        animate={{ height: isOpen ? "15rem" : 0 }}
+        exit={{ height: 0 }}
+        transition={{ duration: 0.3 }}
+        className="absolute bottom-full z-10 bg-transparent h-60 "
+      >
+        <div className="p-1 font-bold cursor-pointer mb-2 bg-white dark:bg-slate-600 opacity-80 dark:text-slate-100 w-52">
+          <h3
+            onClick={() => setIsOpen(!isOpen)}
+            className="inline-flex items-center text-base "
+          >
+            <motion.div
+              animate={{ rotate: isOpen ? 0 : -90 }}
+              transition={{ duration: 0.4 }}
+              style={{ originX: 0.4, originY: 0.5 }}
+            >
+              <VscChevronDown className="w-5 h-5 mr-1" />
+            </motion.div>
+            History Stack
+          </h3>
+        </div>
+        <ul className="list-inside pl-2">
+          {historyStack
+            .slice()
+            .reverse()
+            .map((item, index) => (
+              <li
+                key={index}
+                className="text-sm tracking-wide hover:underline leading-5"
+              >
+                <Link
+                  href={item.path || "/"}
+                  className="inline-flex items-center gap-x-2"
+                >
+                  <TSIcon className="w-5 h-5" />
+                  {item.title || item.path || "Untitled"}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </motion.div>
     </div>
   );
 };

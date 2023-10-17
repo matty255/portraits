@@ -115,7 +115,7 @@ export default function SideBar({
           </div>
         </div>
         {isShown && (
-          <div className="pt-16 w-full h-full transition">
+          <div className="pt-16 w-full h-full transition flex flex-col justify-between">
             {category === "search" && <Search />}
             {category === "folder" && <FolderTree />}
             <HistoryComponent />

@@ -10,14 +10,9 @@ import useMediaQuery from "../../hooks/useMediaquery";
 
 import useToggle from "../../hooks/useToggle";
 import Link from "next/link";
+import DarkModeToggle from "../AddOns/DarkModeToggle";
 
-export default function TitleBar({
-  home,
-  toggleDarkMode,
-}: {
-  home: boolean;
-  toggleDarkMode: () => void;
-}) {
+export default function TitleBar({ home }: { home: boolean }) {
   const isDesktop = useMediaQuery();
   const { isShown, toggle } = useToggle();
 
@@ -31,6 +26,7 @@ export default function TitleBar({
             <VscLayout />
           </Link>
         )} */}
+        <DarkModeToggle />
         <div
           onClick={!isShown ? toggle : () => {}}
           className="group relative items-center cursor-pointer p-1 w-full md:w-1/2 rounded-md col-start-3 col-end-11 dark:hover:bg-slate-900 hover:bg-blue-300  dark:bg-slate-800 flex justify-center content-center m-auto font-semibold"
@@ -45,7 +41,6 @@ export default function TitleBar({
           {isDesktop && (
             <>
               <VscLayoutSidebarLeft
-                onClick={toggleDarkMode}
                 className="w-6 h-6  dark:text-white"
                 aria-hidden="true"
               />
