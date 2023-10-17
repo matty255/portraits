@@ -1,7 +1,7 @@
 // DarkModeToggle.tsx
 import React from "react";
 import { useRecoilState } from "recoil";
-import { darkModeState } from "../../../store/darkModeState"; // 상대 경로에 따라 변경해야 할 수 있습니다.
+import { darkModeState } from "../../store/darkModeState"; // 상대 경로에 따라 변경해야 할 수 있습니다.
 
 const DarkModeToggle: React.FC = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState); // Recoil 상태 사용

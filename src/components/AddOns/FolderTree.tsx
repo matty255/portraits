@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { allPostsDataState } from "../../../store/allPostsDataState";
+import { allPostsDataState } from "../../store/allPostsDataState";
 import { PostData } from "@/types/common";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { VscChevronDown } from "react-icons/vsc";
-import { folderOpenState } from "../../../store/folderTreeOpenState";
+import { folderOpenState } from "../../store/folderTreeOpenState";
 
 interface FolderTreeProps {
   folder: string;

@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { PostContentData, PostIdParams } from "../../types/common";
 import { profile } from "../../constants/profile";
 import { useRecoilState } from "recoil";
-import { allPostsDataState } from "../../../store/allPostsDataState";
+import { allPostsDataState } from "../../store/allPostsDataState";
 
 export default function Post({ postData, allPostsData }: PostContentData) {
   const [allPostsDataInit, setAllPostsData] = useRecoilState(allPostsDataState);

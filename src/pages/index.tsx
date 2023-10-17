@@ -15,7 +15,7 @@ import Chip from "../common/Chip";
 import Layout from "@/layout";
 import { PostData } from "@/types/common";
 import { useRecoilState } from "recoil";
-import { allPostsDataState } from "../../store/allPostsDataState";
+import { allPostsDataState } from "../store/allPostsDataState";
 
 export default function Home({
   allPostsData,

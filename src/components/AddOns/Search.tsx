@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
-import { allPostsDataState } from "../../../store/allPostsDataState";
+import { allPostsDataState } from "../../store/allPostsDataState";
 import { useRecoilState } from "recoil";
 import { PostData } from "@/types/common";
 import Link from "next/link";

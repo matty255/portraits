@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
-import TSIcon from "../../../public/typescript-svgrepo-com.svg";
-import { historyStackState } from "../../../store/historyStackState";
+import TSIcon from "../../../assets/icons/typescript-svgrepo-com.svg";
+import { historyStackState } from "../../store/historyStackState";
 import { useRecoilState } from "recoil";
 interface HistoryItem {
   path: string;

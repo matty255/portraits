@@ -4,18 +4,19 @@ import Head from "next/head";
 import { LayoutProps } from "../types/common";
 import dynamic from "next/dynamic";
 import { useRecoilState } from "recoil";
-import { darkModeState } from "../../store/darkModeState";
+import { darkModeState } from "../store/darkModeState";
 
 export default function Layout({ children, home }: LayoutProps) {
+  const [darkMode, setDarkMode] = useRecoilState(darkModeState); // Recoil 상태 사용
   useEffect(() => {
     const userPrefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
     setDarkMode(userPrefersDark);
-  }, []);
+  }, [setDarkMode]);
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [darkMode, setDarkMode] = useRecoilState(darkModeState); // Recoil 상태 사용
+
   const TitleBar = dynamic(() => import("../components/Bars/TitleBar"), {
     ssr: false,
   });
