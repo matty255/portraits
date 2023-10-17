@@ -1,49 +1,67 @@
-import { useRef, useState, useEffect } from "react";
-import Lottie, { LottieRef, LottieRefCurrentProps } from "lottie-react";
-import darkModeButton from "../../../assets/lottie/animation_lntqbth9.json";
+import React, { useState, useEffect } from "react";
+import { useLottie } from "lottie-react";
+import toggleSwitchAnimation from "../../../assets/lottie/animation_lntqbth9.json";
+import { useRecoilState } from "recoil";
+import { darkModeState } from "@/store/darkModeState";
 
-const ToggleSwitch = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const lottieRef = useRef<LottieRefCurrentProps>(null);
+const ToggleSwitch: React.FC = () => {
+  const style = {
+    width: 80,
+    height: 40,
+    minWidth: "54px",
+    minHeight: "32px",
+  };
+
+  const options = {
+    animationData: toggleSwitchAnimation,
+    loop: false,
+    autoplay: false,
+  };
+
+  const { View, animationItem } = useLottie(options, style);
+  const [darkMode, setDarkMode] = useRecoilState(darkModeState);
+  const [animationCompleted, setAnimationCompleted] = useState(false); // 애니메이션 완료 상태를 저장하는 상태 변수
 
   useEffect(() => {
-    if (lottieRef.current && lottieRef.current.animationItem) {
-      const animation = lottieRef.current;
-
-      // 애니메이션을 처음부터 재생
-      animation.goToAndPlay(0);
-      animation.setDirection(isDarkMode ? -1 : 1);
-    }
-  }, [isDarkMode]);
-
-  const handleClick = async () => {
-    setIsDarkMode(!isDarkMode);
-
-    if (lottieRef.current && lottieRef.current.animationItem) {
-      // 애니메이션을 50%까지 재생
-
-      lottieRef.current.playSegments(
-        [0, lottieRef.current.animationItem.totalFrames / 0.5],
-        true
-      );
+    if (animationItem) {
+      animationItem.addEventListener("complete", () => {
+        setAnimationCompleted(true); // 애니메이션 완료 시 상태 업데이트
+      });
     }
 
-    return (
-      <div className="cursor-pointer" onClick={handleClick}>
-        <Lottie
-          lottieRef={lottieRef}
-          animationData={darkModeButton}
-          loop={false}
-          onComplete={() => {
-            if (lottieRef.current) {
-              const animation = lottieRef.current;
-              animation.stop();
-            }
-          }}
-        />
-      </div>
-    );
+    return () => {
+      if (animationItem) {
+        animationItem.removeEventListener("complete", () => {});
+      }
+    };
+  }, [animationItem]);
+
+  useEffect(() => {
+    if (animationCompleted) {
+      if (darkMode) {
+        animationItem?.setSpeed(0.5);
+        animationItem?.playSegments([120, 300], true);
+      } else {
+        animationItem?.playSegments([2, 30], true);
+      }
+      setAnimationCompleted(false); // 애니메이션 완료 후 상태 초기화
+    }
+  }, [animationCompleted, darkMode, animationItem]);
+
+  const handleToggle = () => {
+    setDarkMode(!darkMode);
+    if (darkMode) {
+      animationItem?.playSegments([50, 100], true);
+    } else {
+      animationItem?.playSegments([80, 0], true);
+    }
   };
+
+  return (
+    <div className="flex ml-2 items-center" onClick={handleToggle}>
+      {View}
+    </div>
+  );
 };
 
 export default ToggleSwitch;
