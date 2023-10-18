@@ -20,7 +20,7 @@ export default function Chip({
   return (
     <div
       onClick={onClick}
-      className={`flex justify-center items-center w-fit h-5 px-3 bg-blue-200 text-sky-400 rounded-full text-center font-bold cursor-pointer`}
+      className={`whitespace-nowrap	flex justify-center items-center w-fit h-5 px-3 bg-blue-200 text-sky-400 rounded-full text-center font-bold cursor-pointer`}
     >
       {content}
     </div>
