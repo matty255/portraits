@@ -3,10 +3,9 @@ import Layout from "@/components/Layout";
 import useCodeMirror from "@/hooks/useCodeMirror";
 import Link from "next/link";
 import { useState } from "react";
-import { InitialDoc } from "../../constants/graph";
 
 export default function Home() {
-  const [data, setData] = useState<string>(InitialDoc);
+  const [data, setData] = useState<string>("print('Hello, world!')");
 
   const { editorRef, getContent } = useCodeMirror(
     data,
@@ -22,11 +21,11 @@ export default function Home() {
 
   return (
     <Layout>
-      <main className="w-full flex flex-col items-center sm:p-6 md:p-12 gap-y-5">
+      <main className="w-full flex flex-col items-center sm:p-6 md:p-12 gap-y-5 ">
         <div ref={editorRef} className="w-full bg-gray-800 rounded-lg"></div>
         <article className="bg-gray-800 rounded-lg p-4 w-full">
           <h1 className="text-3xl font-bold">Hello, world!</h1>
-          <p className="text-lg">Django Model Gallery</p>
+          <p className="text-lg">HR. Lee</p>
         </article>
         <section className="bg-gray-800 rounded-lg p-4 w-full">
           <h2 className="text-2xl font-bold pb-3">Explore</h2>

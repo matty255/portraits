@@ -2,15 +2,15 @@ import { Post } from "@/types/posts/posts";
 
 export const LOOT_LAYOUT_METADATA = {
   title: {
-    template: "%s | DMG",
-    default: "DMG | All Models can be founded here.",
+    template: "%s | Portraits",
+    default: "Portraits | HR. Lee's Blog.",
   },
-  description: "DMG, All Models can be founded here.",
+  description: "Portraits, HR. Lee's Blog.",
   openGraph: {
-    title: "DMG",
-    description: "DMG, All Models can be founded here.",
+    title: "Portraits",
+    description: "Portraits, HR. Lee's Blog.",
     url: "",
-    siteName: "DMG",
+    siteName: "Portraits",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -18,7 +18,53 @@ export const LOOT_LAYOUT_METADATA = {
         url: "",
         width: 800,
         height: 600,
-        alt: "DMG",
+        alt: "Portraits",
+      },
+    ],
+  },
+  icons: {
+    shortcut: "",
+  },
+};
+
+export const LOOT_CONTRIBUTE_METADATA = {
+  title: `Guide | Contribute to Portraits`,
+  description: "Portraits, HR. Lee's Blog.",
+  openGraph: {
+    title: "Contribute",
+    description: "Portraits, HR. Lee's Blog.",
+    siteName: "Portraits",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Portraits",
+      },
+    ],
+  },
+  icons: {
+    shortcut: "",
+  },
+};
+
+export const LOOT_ABOUT_METADATA = {
+  title: `About | About us`,
+  description: "Portraits, HR. Lee's Blog.",
+  openGraph: {
+    title: "About",
+    description: "Portraits, HR. Lee's Blog.",
+    siteName: "Portraits",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Portraits",
       },
     ],
   },
@@ -28,12 +74,12 @@ export const LOOT_LAYOUT_METADATA = {
 };
 
 export const LOOT_POSTS_METADATA = {
-  title: `Posts | DMG Posts`,
-  description: "DMG, All Models can be founded here.",
+  title: `Posts | Portraits Posts`,
+  description: "Portraits, HR. Lee's Blog.",
   openGraph: {
     title: "Posts",
-    description: "DMG, All Models can be founded here.",
-    siteName: "DMG",
+    description: "Portraits, HR. Lee's Blog.",
+    siteName: "Portraits",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -41,7 +87,7 @@ export const LOOT_POSTS_METADATA = {
         url: "",
         width: 800,
         height: 600,
-        alt: "DMG",
+        alt: "Portraits",
       },
     ],
   },
@@ -50,13 +96,25 @@ export const LOOT_POSTS_METADATA = {
   },
 };
 
+export const LOOT_CONTRIBUTE_DETAIL_METADATA = (postDetail: Post | null) => {
+  return {
+    title: postDetail?.title,
+    description: `${postDetail?.frontmatter.title} | HR. Lee.`,
+    openGraph: {
+      title: postDetail?.title,
+      description: `${postDetail?.frontmatter.title} | HR. Lee.`,
+      type: "website",
+    },
+  };
+};
+
 export const LOOT_POST_DETAIL_METADATA = (postDetail: Post | null) => {
   return {
     title: postDetail?.title,
-    description: `${postDetail?.frontmatter.category} | Django Model Gallery.`,
+    description: `${postDetail?.frontmatter.title} | HR. Lee.`,
     openGraph: {
       title: postDetail?.title,
-      description: `${postDetail?.frontmatter.category} | Django Model Gallery.`,
+      description: `${postDetail?.frontmatter.title} | HR. Lee.`,
       type: "website",
     },
   };

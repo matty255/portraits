@@ -9,7 +9,7 @@ export default function DarkModeToggle() {
       <input type="checkbox" checked={!isDarkMode} onChange={toggleDarkMode} />
 
       <svg
-        className="swap-on fill-current w-10 h-10"
+        className="swap-on fill-current w-6 h-6"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -17,7 +17,7 @@ export default function DarkModeToggle() {
       </svg>
 
       <svg
-        className="swap-off fill-current w-10 h-10"
+        className="swap-off fill-current w-6 h-6"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >

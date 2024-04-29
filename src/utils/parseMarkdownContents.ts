@@ -48,11 +48,16 @@ export const parseMarkdownContents = (
     typographer: true,
   })
     .use(anchor, {
-      permalink: true,
       permalinkBefore: true,
+      permalinkClass: "header-anchor",
       permalinkSymbol: "§",
     })
-    .use(toc)
+    .use(toc, {
+      containerClass: "table-of-contents mb-8",
+      listClass: "list-decimal list-inside",
+      itemClass: "ml-4",
+      linkClass: "text-blue-600 hover:underline",
+    })
     .use(footnote);
 
   const html = md.render(markdownContent);

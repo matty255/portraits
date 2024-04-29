@@ -1,5 +1,28 @@
-# Portraits
+# HR. Lee
 
-## 포트폴리오 블로그 다시 제작
+### framework
 
-- 시간내서 만들면 버전업해버리는 Next.js를 어떻게든 따라잡기
+- Next.js
+- Typescript
+
+### state management
+
+- Zustand
+
+### UI
+
+- tailwindCSS
+- daisyUI
+
+## 프로젝트 사용법
+
+### 실행 방법
+
+```bash
+git clone [repo-url] [appname]
+cd [appname]
+npm install
+
+
+npm run dev
+```
