@@ -17,6 +17,9 @@ const config: Config = {
       ...breakpoints,
     },
     extend: {
+      animation: {
+        "spin-slow": "spin 3s ease-in-out infinite",
+      },
       typography: {
         DEFAULT: {
           css: {

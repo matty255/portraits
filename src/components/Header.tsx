@@ -2,21 +2,19 @@
 "use client";
 import useTailwindBreakpoint from "@/hooks/useTailwindBreakpoint";
 import { useToggle } from "@/hooks/useToggle";
+import useDarkModeStore from "@/store/darkModeStore";
 import { useHistoryStore } from "@/store/useHistoryStore";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  NAVBAR_ITEMS,
-  NAVBAR_TITLE,
-  NAVBAR_TITLE_SHORT,
-} from "../../constants/navigation";
+import { NAVBAR_TITLE, NAVBAR_TITLE_SHORT } from "../../constants/navigation";
 import DarkModeToggle from "./DarkModeToggle";
+import MouseSpotlight from "./MouseSpotlight";
 
 export default function Header() {
   const [isopen, toggle] = useToggle(false);
   const { width, breakpoints } = useTailwindBreakpoint();
   const { history } = useHistoryStore();
+  const { isDarkMode } = useDarkModeStore();
 
   const pathname = usePathname();
 
@@ -25,56 +23,12 @@ export default function Header() {
     lastVisitedModel = history[history.length - 2];
   }
   return (
-    <header className="navbar bg-base-100 p-0 min-h-fit sticky top-0">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <summary
-            tabIndex={0}
-            role="button"
-            className="p-1 list-none hover:bg-base-300 rounded-md"
-          >
-            <svg
-              className="swap-off fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 512 512"
-            >
-              <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
-            </svg>
-          </summary>
-          <ul
-            tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow  dark:bg-base-100 rounded-box w-52 bg-neutral-200 text-neutral-600 dark:text-neutral-100"
-          >
-            {NAVBAR_ITEMS.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={
-                    item.name.toLowerCase().replace(/ /g, "-") !== "home"
-                      ? `/${item.name.toLowerCase().replace(/ /g, "-")}`
-                      : "/"
-                  }
-                >
-                  <Image
-                    src={
-                      item?.icon ||
-                      `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/blog.svg`
-                    }
-                    alt={item.name}
-                    width={22}
-                    height={22}
-                  />
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="navbar-center">
+    <header className="navbar p-0 min-h-fit sticky top-0 bg-yellow-400 border-b-2 border-neutral-400">
+      <div className="navbar-start pl-12 text-white">
         <DarkModeToggle />
-        <Link href={"/"} className="btn btn-ghost text-xl">
+        <MouseSpotlight />
+        {/* <div className="fixed top-0 h-full w-full bg-black"></div> */}
+        <Link href={"/"} className="btn btn-ghost text-lg ">
           {width > breakpoints.md ? NAVBAR_TITLE : NAVBAR_TITLE_SHORT}
         </Link>
       </div>

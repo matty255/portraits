@@ -1,12 +1,16 @@
 "use client";
-import useDarkMode from "@/hooks/useDarkMode";
+import useDarkModeStore from "@/store/darkModeStore";
 
 export default function DarkModeToggle() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
-
+  // const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const { isDarkMode, setIsDarkMode } = useDarkModeStore();
   return (
     <label className="swap swap-rotate">
-      <input type="checkbox" checked={!isDarkMode} onChange={toggleDarkMode} />
+      <input
+        type="checkbox"
+        checked={!isDarkMode}
+        onChange={() => setIsDarkMode(!isDarkMode)}
+      />
 
       <svg
         className="swap-on fill-current w-6 h-6"

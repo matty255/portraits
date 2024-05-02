@@ -3,7 +3,6 @@
  * 신규 페이지를 만들 때, 이 레이아웃을 최상단에 import 해야 합니다.
  */
 
-import Footer from "./Footer";
 import Header from "./Header";
 
 /**
@@ -15,10 +14,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <section className="min-h-screen mx-auto scrollbar-hide dark:bg-black bg-white pb-12">
+      <section className="min-h-screen mx-auto scrollbar-hide dark:bg-black  bg-purple-500 pb-12">
         {children}
       </section>
-      <Footer />
     </>
   );
 }

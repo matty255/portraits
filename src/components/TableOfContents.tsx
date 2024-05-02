@@ -26,18 +26,12 @@ export default function TableOfContents({ toc }: { toc: string }) {
         <div role="button" className="btn btn-sm">
           이동
         </div>
-        <div className="toc dropdown-content z-1 shadow bg-base-100 rounded-box w-64 max-w-md pr-4 flex justify-center">
+        <div className="toc dropdown-content z-1 shadow bg-base-100 rounded-box w-fit max-w-md pr-4 flex justify-center">
           <Link href={"/"} className="btn btn-sm">
             홈
           </Link>
           <Link href={"/posts"} className="btn btn-sm">
-            모델
-          </Link>
-          <Link href={"/contribute"} className="btn btn-sm">
-            기여
-          </Link>
-          <Link href={"/license"} className="btn btn-sm">
-            라이센스
+            포스트
           </Link>
         </div>
       </div>
