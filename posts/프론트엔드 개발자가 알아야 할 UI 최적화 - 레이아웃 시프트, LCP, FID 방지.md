@@ -11,9 +11,9 @@ tags:
   - 사용자 경험
 published: true
 contributor:
-  name: 홍길동
+  name: 이혜림
   social:
-    github: https://github.com/honggildong
+    github: https://github.com/matty255
 ---
 
 # 프론트엔드 개발자가 알아야 할 UI 최적화 - 레이아웃 시프트, LCP, FID 방지

@@ -11,7 +11,7 @@ published: true
 contributor:
   name: 이혜림
   social:
-    github: https://github.com/honggildong
+    github: https://github.com/matty255
 ---
 
 # useCallback과 useMemo의 적절한 사용법과 용례
