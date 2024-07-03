@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.glow {
+  filter: url("#glow");
+  animation: glow 1.5s infinite;
+}

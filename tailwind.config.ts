@@ -17,8 +17,18 @@ const config: Config = {
       ...breakpoints,
     },
     extend: {
+      keyframes: {
+        glow: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+      },
       animation: {
         "spin-slow": "spin 3s ease-in-out infinite",
+        glow: "glow 1.5s infinite",
+      },
+      cursor: {
+        "custom-cursor": 'url("/assets/light/light-icon.svg"), auto',
       },
       typography: {
         DEFAULT: {

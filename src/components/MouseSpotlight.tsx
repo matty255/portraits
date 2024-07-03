@@ -30,7 +30,6 @@ const MouseSpotlight = () => {
         const spotlightWidth = spotlightRef.current.offsetWidth;
         const spotlightHeight = spotlightRef.current.offsetHeight;
 
-        // 화면 가운데를 기준으로 마우스 위치 조정
         const centerX = windowWidth / 2;
         const centerY = windowHeight / 2;
         const offsetX = newMousePos.clientX - centerX;
@@ -45,12 +44,14 @@ const MouseSpotlight = () => {
 
     const updateDarkMode = () => {
       if (isDarkMode) {
+        document.body.classList.add("cursor-custom-cursor"); // 커스텀 커서 클래스를 추가합니다.
         document.addEventListener("mousemove", updateFlashlight);
         document.addEventListener("touchstart", updateFlashlight);
         document.addEventListener("touchmove", updateFlashlight);
         document.addEventListener("touchend", updateFlashlight);
       } else {
         setMousePos(null);
+        document.body.classList.remove("cursor-custom-cursor"); // 커스텀 커서 클래스를 제거합니다.
         document.removeEventListener("mousemove", updateFlashlight);
         document.removeEventListener("touchstart", updateFlashlight);
         document.removeEventListener("touchmove", updateFlashlight);
@@ -61,6 +62,7 @@ const MouseSpotlight = () => {
     updateDarkMode();
 
     return () => {
+      document.body.classList.remove("cursor-custom-cursor"); // 컴포넌트 언마운트 시 커스텀 커서 클래스를 제거합니다.
       document.removeEventListener("mousemove", updateFlashlight);
       document.removeEventListener("touchstart", updateFlashlight);
       document.removeEventListener("touchmove", updateFlashlight);
@@ -96,34 +98,46 @@ const MouseSpotlight = () => {
   return (
     <>
       {isDarkMode && (
-        <div
-          ref={spotlightRef}
-          style={{
-            display: "block",
-            position: "fixed",
-            boxShadow: "0 0 0 9999px #000",
-            width: "250px",
-            height: "250px",
-            pointerEvents: "none",
-            zIndex: 10,
-            aspectRatio: "250 / 250",
-          }}
-          className="rounded-full"
-        >
-          <Image
-            src={`${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/light/flashlight.png`}
-            alt="Mouse spotlight"
-            sizes="250px"
-            width={250}
-            height={250}
+        <>
+          <div className="fixed top-0 left-0 w-full h-auto z-[9999]">
+            {/* <Image
+              src="/assets/light/flashlight-background.png"
+              alt="Flashlight Background"
+              layout="responsive"
+              width={1920}
+              height={1080}
+              className="w-full h-auto"
+            /> */}
+          </div>
+          <div
+            ref={spotlightRef}
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
+              display: "block",
+              position: "fixed",
+              boxShadow: "0 0 0 9999px #000",
+              width: "250px",
+              height: "250px",
+              pointerEvents: "none",
+              zIndex: 10,
+              aspectRatio: "250 / 250",
             }}
-            className="animate-spin-slow"
-          />
-        </div>
+            className="rounded-full"
+          >
+            <Image
+              src={`${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/light/flashlight.png`}
+              alt="Mouse spotlight"
+              sizes="250px"
+              width={250}
+              height={250}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+              className=""
+            />
+          </div>
+        </>
       )}
     </>
   );
