@@ -13,29 +13,51 @@ import { cache } from "react";
  * @throws {Error} 파일 읽기 또는 파싱 중 에러 발생 시 파일 slug와 함께 에러를 반환합니다. 여기서 slug는 파일 이름에서 확장자(.md)를 제외한 부분입니다.
  */
 export const getPosts = cache(async (folderName: string = "posts") => {
-  const postsDirectory = path.resolve(process.cwd(), folderName);
-  const files = await fs.readdir(postsDirectory);
-  const posts = await Promise.all(
-    files
-      .filter((file) => path.extname(file) === ".md")
-      .map(async (file) => {
-        const filePath = path.resolve(postsDirectory, file);
-        const content = await fs.readFile(filePath, "utf8");
-        const { data, content: body } = matter(content);
+  try {
+    const postsDirectory = path.resolve(process.cwd(), folderName);
+    const files = await fs.readdir(postsDirectory);
+    const posts = await Promise.all(
+      files
+        .filter((file) => path.extname(file) === ".md")
+        .map(async (file) => {
+          const decodedFileName = decodeURIComponent(file);
+          const filePath = path.resolve(postsDirectory, decodedFileName);
+          const content = await fs.readFile(filePath, "utf8");
+          const { data, content: body } = matter(content);
 
-        if (data.published === false) {
-          return null;
+          if (data.published === false) {
+            return null;
+          }
+
+          const slug = decodedFileName.replace(/\.md$/, "");
+          return {
+            frontmatter: data as FrontmatterData,
+            body,
+            slug,
+            title: data.title,
+          } as Post;
+        })
+    );
+
+    // 날짜 순으로 정렬 (최신순)
+    const sortedPosts = posts
+      .filter((post) => post !== null)
+      .sort((a, b) => {
+        if (a === null || b === null) {
+          return 0;
         }
+        return (
+          new Date(b.frontmatter.date).getTime() -
+          new Date(a.frontmatter.date).getTime()
+        );
+      });
 
-        const slug = file.replace(/\.md$/, "");
-        return {
-          frontmatter: data as FrontmatterData,
-          body,
-          slug,
-          title: data.title,
-        } as Post;
-      })
-  );
-
-  return posts.filter((post) => post !== null);
+    return sortedPosts;
+  } catch (error) {
+    console.error(
+      `Error while reading posts from folder: ${folderName}`,
+      error
+    );
+    throw new Error(`Error while reading posts from folder: ${folderName}`);
+  }
 });

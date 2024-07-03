@@ -23,16 +23,22 @@ export default function Header() {
     lastVisitedModel = history[history.length - 2];
   }
   return (
-    <header className="navbar p-0 min-h-fit sticky top-0 bg-yellow-400 border-b-2 border-neutral-400">
-      <div className="navbar-start pl-12 text-white">
-        <DarkModeToggle />
-        <MouseSpotlight />
-        {/* <div className="fixed top-0 h-full w-full bg-black"></div> */}
-        <Link href={"/"} className="btn btn-ghost text-lg ">
-          {width > breakpoints.md ? NAVBAR_TITLE : NAVBAR_TITLE_SHORT}
-        </Link>
-      </div>
-      <div className="navbar-end"></div>
-    </header>
+    <>
+      <header className="navbar p-0 min-h-fit sticky top-0 bg-red-300 pb-1.5">
+        <div className="navbar-start pl-12 text-black ">
+          <DarkModeToggle />
+          <MouseSpotlight />
+          {/* <div className="fixed top-0 h-full w-full bg-black"></div> */}
+          <Link
+            href={"/"}
+            className="underline-offset-2 hover:underline text-black text-xl font-extrabold pl-3 pt-1.5"
+          >
+            {width > breakpoints.md ? NAVBAR_TITLE : NAVBAR_TITLE_SHORT}
+          </Link>
+        </div>
+        <div className="navbar-end"></div>
+      </header>
+      <div className="border-b border-white mx-5 md:mx-10 lg:mx-20"></div>
+    </>
   );
 }

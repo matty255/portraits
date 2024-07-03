@@ -8,6 +8,8 @@ import matter from "gray-matter";
 import path from "path";
 import { cache } from "react";
 
+// getPost.ts
+
 /**
  * 주어진 폴더 이름과 slug를 사용하여 Markdown 파일(post)을 불러오는 함수입니다.
  * 불러온 Markdown 파일을 파싱하여 Post 객체로 변환합니다.
@@ -20,7 +22,11 @@ import { cache } from "react";
  */
 export const getPost = cache(
   async (slug: string, folderName: string = "posts") => {
-    const filePath = path.resolve(process.cwd(), `${folderName}/${slug}.md`);
+    const decodedSlug = decodeURIComponent(slug);
+    const filePath = path.resolve(
+      process.cwd(),
+      `${folderName}/${decodedSlug}.md`
+    );
     try {
       const fileContents = await fs.readFile(filePath, "utf8");
       const { data, content } = matter(fileContents);
@@ -36,7 +42,7 @@ export const getPost = cache(
         frontmatter,
         body: parsedContent.html,
         title: frontmatter.title || "No Title",
-        slug,
+        slug: decodedSlug,
         tableOfContents: parsedContent.tableOfContents,
         footnotes: parsedContent.footnotes,
         pythonCodeBlocks: parsedContent.pythonCodeBlocks,
@@ -45,7 +51,10 @@ export const getPost = cache(
         otherCodeBlocks: parsedContent.otherCodeBlocks,
       } as Post;
     } catch (error) {
-      console.error(`postName: ${slug} \n에서 파싱에 실패했습니다.`, error);
+      console.error(
+        `postName: ${decodedSlug} \n에서 파싱에 실패했습니다.`,
+        error
+      );
       return null;
     }
   }

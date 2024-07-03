@@ -5,7 +5,7 @@ export default function DarkModeToggle() {
   const { isDarkMode, setIsDarkMode } = useDarkModeStore();
 
   return (
-    <label className="swap swap-rotate">
+    <label className="swap swap-rotate pt-1">
       <input
         type="checkbox"
         checked={!isDarkMode}

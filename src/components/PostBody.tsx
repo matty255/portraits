@@ -20,7 +20,7 @@ export default function PostBody(postContent: Post) {
   const pathname = usePathname();
 
   return (
-    <article className="post overflow-x-scroll">
+    <article className="post overflow-x-scroll pt-3 px-3">
       <div className="fixed bottom-5 left-5">
         <TableOfContents toc={postContent.tableOfContents} />
       </div>

@@ -34,17 +34,38 @@ const config: Config = {
         DEFAULT: {
           css: {
             margin: "0 auto",
-            color: "#333",
+            color: "black",
             maxWidth: "105ch",
             backgroundColor: "transparent",
+            "ol > li::marker": {
+              color: "black",
+            },
+
+            "ul > li::marker": {
+              color: "black",
+            },
+            ul: {
+              listStyleType: "square",
+            },
+
             h1: {
-              color: "lime",
+              color: "black",
+            },
+            h2: {
+              color: "black",
+            },
+            h3: {
+              color: "black",
             },
             a: {
-              color: "#3182ce",
+              color: "black",
               "&:hover": {
-                color: "#2c5282",
+                color: "#eab308",
               },
+            },
+            code: {
+              color: "#111827",
+              backgroundColor: "#eab308",
             },
           },
         },
